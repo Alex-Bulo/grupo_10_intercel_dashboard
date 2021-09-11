@@ -2,14 +2,12 @@ import { Component } from 'react'
 import PropTypes from 'prop-types'
 
 
-class ContentRowTotals extends Component {
-
-    render(){
-
-
+function ContentRowTotals(props) {
+    console.log(props);
+    props.data.map((data)=>{console.log(data);})
         return(
             <>
-                {this.props.data.map( (info,i) => {
+                {props.data.map( (info,i) => {
                     return(
 
                             <div key={`row-${i}`} className="col-md-4 mb-4">
@@ -35,7 +33,6 @@ class ContentRowTotals extends Component {
                 })}
             </>
         )
-    }   
 }
 
 
