@@ -18,7 +18,7 @@ function ContentWrapper (props) {
                     
                 </div>
 
-                <Tabla />
+                {/* <Tabla /> */}
                 <Footer />
 
 

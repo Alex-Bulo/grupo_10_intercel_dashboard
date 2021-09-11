@@ -9,11 +9,17 @@ import CategoriesInDB from './CategoriesInDB.js'
 function ContentRowTop (props) {
 		const PRODUCTS_API = 'http://localhost:3001/api/products'
 		const USERS_API = 'http://localhost:3001/api/users'
-
-		// traer la info de la BDD
+		
 		const [celTotal, setCelTotal] = useState('')
 		const [brandTotal, setBrandTotal] = useState('')
 		const [userTotal, setUserTotal] = useState('')
+
+		let totals = [
+			{titulo:'Celulares en Stock',colorBorde:'#4e73df',cifra:celTotal,icono:'fa-mobile'},
+			{titulo:'Marcas en Stock',colorBorde:'green',cifra:brandTotal,icono:'fa-copyright'},
+			{titulo:'Usuarios Registrados',colorBorde:'red',cifra:userTotal,icono:'fa-user-friends'}
+		]
+
 
 		useEffect( ()=>{
 			fetch(PRODUCTS_API)
@@ -22,21 +28,15 @@ function ContentRowTop (props) {
 					setCelTotal([productsInfo.count])
 					setBrandTotal([productsInfo.countByBrand.length])
 				})
-				fetch(USERS_API)
-				.then(res => res.json())
-				.then( usersInfo => {
-					setUserTotal([usersInfo.count])
-					// setBrandTotal([productsInfo.countByBrand.length])
-				})
+			fetch(USERS_API)
+			.then(res => res.json())
+			.then( usersInfo => {
+				setUserTotal([usersInfo.count])
+			})
 //ERROR: loop infinito al pasar totals. Si no se pasa nada, se setea Totals 1 vez (pero no se actualizaria si cambia)
 		} , [])
 
 
-		let totals = [
-			{titulo:'Celulares en Stock',colorBorde:'#4e73df',cifra:celTotal,icono:'fa-mobile'},
-			{titulo:'Marcas en Stock',colorBorde:'green',cifra:brandTotal,icono:'fa-copyright'},
-			{titulo:'Usuarios Registrados',colorBorde:'red',cifra:userTotal,icono:'fa-user-friends'}
-		]
 		// console.log(RowInfo);
 
         return(
