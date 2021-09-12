@@ -12,11 +12,13 @@ function ContentRowTop (props) {
 		
 		const [celTotal, setCelTotal] = useState('')
 		const [brandTotal, setBrandTotal] = useState('')
+		const [modelTotal, setModelTotal] = useState('')
 		const [userTotal, setUserTotal] = useState('')
 
 		let totals = [
 			{titulo:'Celulares en Stock',colorBorde:'#4e73df',cifra:celTotal,icono:'fa-mobile'},
 			{titulo:'Marcas en Stock',colorBorde:'green',cifra:brandTotal,icono:'fa-copyright'},
+			{titulo:'Modelos en Stock',colorBorde:'grey',cifra:modelTotal,icono:'fa-snowflake'},
 			{titulo:'Usuarios Registrados',colorBorde:'red',cifra:userTotal,icono:'fa-user-friends'}
 		]
 
@@ -27,6 +29,9 @@ function ContentRowTop (props) {
 				.then( productsInfo => {
 					setCelTotal([productsInfo.count])
 					setBrandTotal([productsInfo.countByBrand.length])
+					
+					let modelsInStock = productsInfo.countByBrand.reduce( (acum,p) => p.models.length + acum,0)
+					setModelTotal([modelsInStock])
 				})
 			fetch(USERS_API)
 			.then(res => res.json())
