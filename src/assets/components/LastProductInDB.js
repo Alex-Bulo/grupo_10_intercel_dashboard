@@ -11,14 +11,20 @@ function LastProductInDB (props) {
         let products = await fetch(PRODUCTS_API)
         products = await products.json()
         let lastProduct = products.products.reduce((acum,p)=> p.updatedAt > acum.updatedAt ? p : acum)
-    
+        
         let lastCelInfo = await fetch(`${lastProduct.detail}`)
         lastCelInfo = await lastCelInfo.json()
+
+        
         
         setLastCel({...lastCelInfo})
 
+        
+
 //ERROR: loop infinito al pasar lastCel. Si no se pasa nada, se setea lastCel 1 vez (pero no se actualizaria si cambia)
     },[])
+
+   
 
     return(
         <div className="col-lg-6 mb-4">
@@ -33,7 +39,7 @@ function LastProductInDB (props) {
                     </div>
                     <p>{lastCel?`${lastCel.description}`:''}</p>
                     <p style={{fontWeight:'bold',textAlign:'right', marginRight:'15px'}}>{lastCel?`$ ${lastCel.price}`:''}</p>
-                    <a className="btn btn-danger" target="_blank" href={lastCel?`${lastCel.webLink}`:''}>Ver en Web</a>
+                    <a className="btn btn-danger" target="_blank" href={lastCel?`${lastCel.webLink}`:''}>Ver en página</a>
                 </div>
             </div>
         </div>
