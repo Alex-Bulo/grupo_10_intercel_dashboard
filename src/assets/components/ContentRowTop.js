@@ -7,6 +7,7 @@ import CategoriesInDB from './CategoriesInDB.js'
 
 
 function ContentRowTop (props) {
+	
 		const PRODUCTS_API = 'http://localhost:3001/api/products'
 		const USERS_API = 'http://localhost:3001/api/users'
 		
@@ -56,8 +57,7 @@ function ContentRowTop (props) {
 			settingStates()
 			setInterval(settingStates, 1000 * 60 * 1)
 			}, [])
-
-
+	
 		const refresh = () => {
 			settingStates()
 			console.log('REFRESH');
