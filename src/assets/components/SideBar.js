@@ -28,24 +28,16 @@ function SideBar (props) {
                 {/* <!-- Heading --> */}
                 <div className="sidebar-heading">Menu</div>
 
-                {/* <!-- Nav Item - Pages --> */}
-                {/* <li className="nav-item">
-                    <Link className="nav-link collapsed" to="/totals">
-                        <i className="fas fa-fw fa-folder"></i>
-                        <span>Totales</span>
-                    </Link> */}
-                {/* </li> */}
-
                 {/* <!-- Nav Item - Charts --> */}
                 <li className="nav-item">
-                    <Link className="nav-link" to="/lastProduct">
+                    <Link className="nav-link text-gray-800" to="/lastProduct">
                         <i className="fas fa-fw fa-chart-area"></i>
                         <span>Último Producto</span></Link>
                 </li>
 
                 {/* <!-- Nav Item - Tables --> */}
                 <li className="nav-item">
-                    <Link to="/products" className="nav-link">
+                    <Link to="/products" className="nav-link text-gray-800">
                         <i className="fas fa-fw fa-table"></i>
                         <span>Productos</span></Link>
                 </li>
