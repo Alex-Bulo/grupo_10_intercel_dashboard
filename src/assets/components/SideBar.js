@@ -1,9 +1,7 @@
-import { Component } from 'react'
+import { Link } from 'react-router-dom'
 import logo from '../images/logo-DH.png'
 
-class SideBar extends Component {
-
-    render(){
+function SideBar (props) {
         return (
             <ul className="navbar-nav bg-gradient-secondary sidebar sidebar-dark accordion" id="accordionSidebar">
 
@@ -47,16 +45,16 @@ class SideBar extends Component {
 
                 {/* <!-- Nav Item - Tables --> */}
                 <li className="nav-item">
-                    <a className="nav-link" href="/">
+                    <Link to="/products" className="nav-link">
                         <i className="fas fa-fw fa-table"></i>
-                        <span>Tables</span></a>
+                        <span>Productos</span></Link>
                 </li>
 
                 {/* <!-- Divider --> */}
                 <hr className="sidebar-divider d-none d-md-block" />
             </ul>
+
         )
-    }
 }
 
 export default SideBar

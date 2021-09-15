@@ -6,8 +6,8 @@ import '../css/App.css';
 function App() {
   return (
     <div className="App" style={{display:'flex'}}>
-      <SideBar />
-      <ContentWrapper />
+      <SideBar/>
+      <ContentWrapper/>
     </div>
   );
 }

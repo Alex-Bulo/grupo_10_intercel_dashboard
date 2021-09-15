@@ -10,6 +10,7 @@ function ContentRowTop (props) {
 		const PRODUCTS_API = 'http://localhost:3001/api/products'
 		const USERS_API = 'http://localhost:3001/api/users'
 		
+		const [productsDB, setProductsDB] = useState(null)
 		const [celTotal, setCelTotal] = useState('')
 		const [brandTotal, setBrandTotal] = useState('')
 		const [modelTotal, setModelTotal] = useState('')
@@ -23,44 +24,50 @@ function ContentRowTop (props) {
 			{titulo:'Usuarios Registrados',colorBorde:'red',cifra:userTotal,icono:'fa-user-friends'}
 		]
 
+		const apiCall = async () =>{
+			
+			const products = await fetch(PRODUCTS_API)
+        	const productsInfo = await products.json()
+							
+			const users = await fetch(USERS_API)
+			const usersInfo = await users.json()
 
-		useEffect( ()=>{
-			fetch(PRODUCTS_API)
-				.then(res => res.json())
-				.then( productsInfo => {
-					setCelTotal([productsInfo.count])
-					setBrandTotal([productsInfo.countByBrand.length])
-					
-					setAllBrandsModels([...productsInfo.countByBrand])
+			
+			return [productsInfo,usersInfo]	
+		}
 
-					// let brandNames = productsInfo.countByBrand.map( brand => brand.brand)
-					// setAllBrands([brandNames])
-					
-					let modelsInStock = productsInfo.countByBrand.reduce( (acum,p) => p.models.length + acum,0)
-					setModelTotal([modelsInStock])
-					// let modelNames = productsInfo.countByBrand.map( brand => {
-					// 	return brand.models.map (model => model.model)
-					// })
-					// console.log(modelNames);
-					// setAllBrands([brandNames])
-					// console.log(allBrandsModels);				
-				})
-			fetch(USERS_API)
-			.then(res => res.json())
-			.then( usersInfo => {
-				setUserTotal([usersInfo.count])
-			})
-//ERROR: loop infinito al pasar totals. Si no se pasa nada, se setea Totals 1 vez (pero no se actualizaria si cambia)
-		} , [])
+		const settingStates = async () =>{
+			const [products, users] = await apiCall()
+			setProductsDB(products)
+			
+			setCelTotal([products.count])
+			setBrandTotal([products.countByBrand.length])
+			
+			setAllBrandsModels([...products.countByBrand])
+			
+			let modelsInStock = products.countByBrand.reduce( (acum,p) => p.models.length + acum,0)
+			setModelTotal([modelsInStock])
+			
+			setUserTotal([users.count])
+			console.log('DONE STATES');
+		}
+
+		useEffect(()=>{
+			settingStates()
+			setInterval(settingStates, 1000 * 60 * 1)
+			}, [])
 
 
-		// console.log(RowInfo);
+		const refresh = () => {
+			settingStates()
+			console.log('REFRESH');
+		}
 
         return(
 
             <div className="container-fluid">
 					<div className="d-sm-flex align-items-center justify-content-between mb-4">
-						<h1 className="h3 mb-0 text-gray-800">Intercel Dashboard</h1>
+						<h1 className="h3 mb-0 text-gray-800">Intercel Dashboard<i onClick={refresh} className="fas fa-sync-alt" style={{marginLeft:'15px', cursor:'pointer'}}></i></h1>
 					</div>
 				
 					{/* <!-- Content Row Movies--> */}
@@ -70,12 +77,10 @@ function ContentRowTop (props) {
 					</div>
 					{/* <!-- Content Row Last Movie in Data Base --> */}
 					<div className="row">
-					<LastProductInDB />
-					{/* <div className="sub-row" style={{maxWidth:'50%'}}> */}
-						<CategoriesInDB data={allBrandsModels} />
-						{/* <CategoriesInDB /> */}
-					{/* </div> */}
 						
+						{productsDB ? <LastProductInDB data={productsDB}/>:''}
+
+						<CategoriesInDB data={allBrandsModels} />	
 						
 
 					</div>

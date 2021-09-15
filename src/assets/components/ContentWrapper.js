@@ -1,8 +1,9 @@
 import { Component } from 'react'
 import TopBar from './TopBar'
 import ContentRowTop from './ContentRowTop'
-import Tabla from './Tabla'
+import ProductList from './ProductList'
 import Footer from './Footer'
+import {Route, Switch} from 'react-router-dom'
 
 
 function ContentWrapper (props) {
@@ -14,8 +15,11 @@ function ContentWrapper (props) {
                 <div id="content">
                     <TopBar />
                     
-                    <ContentRowTop />
-                    
+                    <Switch>
+                        <Route path="/" exact component={ContentRowTop}/>
+                        <Route path="/products" component={ProductList}/>
+
+                    </Switch>                    
                 </div>
 
                 {/* <Tabla /> */}

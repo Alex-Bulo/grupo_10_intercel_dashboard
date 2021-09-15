@@ -3,9 +3,8 @@ import PropTypes from 'prop-types'
 
 
 function ContentRowTotals(props) {
-    // console.log(props);
-    // props.data.map((data)=>{console.log(data);})
-        return(
+    
+    return(
             <>
                 {props.data.map( (info,i) => {
                     return(

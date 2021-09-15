@@ -1,24 +1,21 @@
 import { useEffect, useState } from 'react'
-import mandalorian from '../images/mandalorian.jpg'
-
+const moment = require('moment')
 
 function LastProductInDB (props) {
-    const PRODUCTS_API = 'http://localhost:3001/api/products'
 
     const [lastCel, setLastCel] = useState(null)
 
     useEffect( async ()=>{
-        let products = await fetch(PRODUCTS_API)
-        products = await products.json()
-        let lastProduct = products.products.reduce((acum,p)=> p.updatedAt > acum.updatedAt ? p : acum)
+                    
+            const {products} = props.data
+            let lastProduct = products.reduce((acum,p)=> moment(p.updatedAt).isAfter(acum.updatedAt) ? p : acum, {updatedAt:'1800-01-01'})
+            
+            let lastCelInfo = await fetch(`${lastProduct.detail}`)
+            lastCelInfo = await lastCelInfo.json()
     
-        let lastCelInfo = await fetch(`${lastProduct.detail}`)
-        lastCelInfo = await lastCelInfo.json()
+            setLastCel({...lastCelInfo})
         
-        setLastCel({...lastCelInfo})
-
-//ERROR: loop infinito al pasar lastCel. Si no se pasa nada, se setea lastCel 1 vez (pero no se actualizaria si cambia)
-    },[])
+    },[props.data])
 
     return(
         <div className="col-lg-6 mb-4">
