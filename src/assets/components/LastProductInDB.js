@@ -17,6 +17,8 @@ function LastProductInDB (props) {
         
     },[props.data])
 
+   
+
     return(
         <div className="col-lg-6 mb-4">
             <div className="card shadow mb-4">
@@ -30,7 +32,7 @@ function LastProductInDB (props) {
                     </div>
                     <p>{lastCel?`${lastCel.description}`:''}</p>
                     <p style={{fontWeight:'bold',textAlign:'right', marginRight:'15px'}}>{lastCel?`$ ${lastCel.price}`:''}</p>
-                    <a className="btn btn-danger" target="_blank" href={lastCel?`${lastCel.webLink}`:''}>Ver en Web</a>
+                    <a className="btn btn-danger" target="_blank" href={lastCel?`${lastCel.webLink}`:''}>Ver en página</a>
                 </div>
             </div>
         </div>
