@@ -43,6 +43,7 @@ function ContentWrapper (props) {
                     
                     <Switch>
                         <Route path="/" exact component={ContentRowTop}/>
+                        
                         <Route path="/products"> 
                             {products ? <ProductList data={products}/>:''}
                         </Route>
