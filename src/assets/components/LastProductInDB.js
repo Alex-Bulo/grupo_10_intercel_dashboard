@@ -8,7 +8,7 @@ function LastProductInDB (props) {
     useEffect( async ()=>{
                     
             const {products} = props.data
-            let lastProduct = products.reduce((acum,p)=> moment(p.updatedAt).isAfter(acum.updatedAt) ? p : acum, {updatedAt:'1800-01-01'})
+            let lastProduct = products.reduce( (acum,p) => moment(p.updatedAt).isAfter(acum.updatedAt) ? p : acum, {updatedAt:'1800-01-01'})
             
             let lastCelInfo = await fetch(`${lastProduct.detail}`)
             lastCelInfo = await lastCelInfo.json()
@@ -16,8 +16,6 @@ function LastProductInDB (props) {
             setLastCel({...lastCelInfo})
         
     },[props.data])
-
-   
 
     return(
         <div className="col-lg-6 mb-4">

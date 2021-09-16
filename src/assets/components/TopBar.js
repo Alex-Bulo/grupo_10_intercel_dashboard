@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 
 
-function TopBar () {
+function TopBar (props) {
 
 	const USERS_API = 'http://localhost:3001/api/users'
 
@@ -24,7 +24,7 @@ function TopBar () {
     return (
             
         <nav className="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
-
+			{props.children}
 			{/* <!-- Sidebar Toggle (Topbar) --> */}
 			<button id="sidebarToggleTop" className="btn btn-link d-md-none rounded-circle mr-3">
 				<i className="fa fa-bars"></i>
