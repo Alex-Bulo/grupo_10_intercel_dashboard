@@ -1,14 +1,29 @@
+import {useEffect, useState} from 'react'
+import {Link, useParams} from 'react-router-dom'
 import '../css/ProductList.css'
 
 
 function ProductList (props){
-    const {products} = props.data
+    const [listProducts, setListProducts] = useState(null)
+    const {page} = useParams()
     
+    const PAGINATE_API = `http://localhost:3001/api/products/list?page=${page}`
+    
+    const apiCall = async () =>{    
+        const list = await fetch(PAGINATE_API)
+        const listInfo = await list.json()
+        setListProducts(listInfo)
+    }
+    
+    useEffect(apiCall, [page])
+
+
     return(
         <section className="ProductList">
 
-                {products && 
-                    products.map( (cel,i) => {
+                {listProducts && 
+                    <>
+                    {listProducts.products.map( (cel,i) => {
                       return(  
                         <article className="productCard" key={`${cel.id}-${i}`}>
                             <div>
@@ -21,10 +36,12 @@ function ProductList (props){
                             <a href={`http://localhost:3001/products/${cel.id}/editProduct`} target="_blank"><button>To Edit</button></a>
                         </article>
                       )
-                    })
+                    })}
+                <Link to={listProducts.previous}>Anterior</Link>
+                <Link to={listProducts.next}>Siguiente</Link>
+                </>
                 }
-
-                        
+            
                 
         </section>
     )
