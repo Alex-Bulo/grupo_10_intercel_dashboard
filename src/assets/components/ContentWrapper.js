@@ -9,25 +9,37 @@ import {Route, Switch} from 'react-router-dom'
 function ContentWrapper (props) {
 
     const PRODUCTS_API = 'http://localhost:3001/api/products'
-		
+	const USERS_API = 'http://localhost:3001/api/users'
+	
     const [products, setProducts] = useState(null)
+    const [users, setUsers] = useState(null)
 
     const apiCall = async () =>{
         
-        const products = await fetch(PRODUCTS_API)
-        const productsInfo = await products.json()
+        const productsDB = await fetch(PRODUCTS_API)
+        const productsInfo = await productsDB.json()
+        setProducts(productsInfo)
         
-        setProducts(productsInfo)        
+        
+        const usersDB = await fetch(USERS_API)
+        const usersInfo = await usersDB.json()
+        setUsers(usersInfo)
+        
     }
+
+    let timingApiCalls =()=> setInterval(apiCall, 1000 * 60 * 5)
 
     useEffect( ()=>{
         apiCall()
-        setInterval(apiCall, 1000 * 60 * 5)
+        timingApiCalls()
+        return function (){
+            timingApiCalls = console.log('unmount')
+        } 
     }, [])
     
     const refresh = () => {
         apiCall()
-        console.log('REFRESH');
+        console.log('Refreshed');
     }
 
         return(
@@ -35,14 +47,16 @@ function ContentWrapper (props) {
             <div className="d-flex flex-column" id="content-wrapper">
 
                 <div id="content">
-                    <TopBar>
+                    { users ? <TopBar data={users}>
                     
                         <i onClick={refresh} className="fas fa-sync-alt" style={{marginLeft:'15px', cursor:'pointer'}}></i>
                     
-                    </TopBar>
+                    </TopBar> : ''}
                     
                     <Switch>
-                        <Route path="/" exact component={ContentRowTop}/>
+                        <Route path="/" exact> 
+                            {(products&&users) ? <ContentRowTop data={[products,users]}/>:''}
+                        </Route>
                         
                         <Route path="/products"> 
                             {products ? <ProductList data={products}/>:''}

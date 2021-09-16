@@ -3,22 +3,17 @@ import { useState, useEffect } from 'react'
 
 function TopBar (props) {
 
-	const USERS_API = 'http://localhost:3001/api/users'
+	const {users} = props.data
 
 	const [user, setUser] = useState('')
 
 	useEffect( async ()=>{
-        let users = await fetch(USERS_API)
-        users = await users.json()
 
-		let randomUser = users.users[2]
-
-		let userInfo = await fetch(`${randomUser.detail}`)
+		let userInfo = await fetch(`${users[2].detail}`)
 		userInfo = await userInfo.json()
-
+		
 		setUser({...userInfo})
-
-    },[])
+	} ,[])
 	
 
     return (
