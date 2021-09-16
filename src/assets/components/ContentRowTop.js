@@ -30,7 +30,10 @@ function ContentRowTop (props) {
 			console.log('DONE STATES');
 		}
 
-		useEffect(settingStates , [products,users])
+		useEffect(()=>{
+			settingStates()
+			return ()=> console.log('ContentRowTop Unmount');
+		} , [products,users])
 		
 		let totals = [
 			{titulo:'Celulares en Stock',colorBorde:'#4e73df',cifra:celTotal,icono:'fa-mobile'},

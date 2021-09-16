@@ -37,6 +37,13 @@ function SideBar (props) {
 
                 {/* <!-- Nav Item - Tables --> */}
                 <li className="nav-item">
+                    <Link to="/brands" className="nav-link text-gray-800">
+                        <i className="fas fa-fw fa-table"></i>
+                        <span>Marcas</span></Link>
+                </li>
+
+                {/* <!-- Nav Item - Tables --> */}
+                <li className="nav-item">
                     <Link to="/products" className="nav-link text-gray-800">
                         <i className="fas fa-fw fa-table"></i>
                         <span>Productos</span></Link>

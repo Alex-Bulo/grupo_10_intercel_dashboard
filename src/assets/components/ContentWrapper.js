@@ -4,6 +4,8 @@ import ContentRowTop from './ContentRowTop'
 import ProductList from './ProductList'
 import Footer from './Footer'
 import {Route, Switch} from 'react-router-dom'
+import LastProductInDB from './LastProductInDB'
+import CategoriesInDB from './CategoriesInDB'
 
 
 function ContentWrapper (props) {
@@ -58,9 +60,19 @@ function ContentWrapper (props) {
                             {(products&&users) ? <ContentRowTop data={[products,users]}/>:''}
                         </Route>
                         
-                        <Route path="/products"> 
-                            {products ? <ProductList data={products}/>:''}
-                        </Route>
+                        { products &&
+                            <>
+                                <Route path="/products"> 
+                                    <ProductList data={products}/>
+                                </Route>
+                                <Route path="/lastProduct"> 
+                                    <LastProductInDB data={products}/>
+                                </Route>
+                                <Route path="/brands"> 
+                                    <CategoriesInDB data={[...products.countByBrand]}/>
+                                </Route>
+                            </>
+                        }
 
                     </Switch>                    
                 </div>
