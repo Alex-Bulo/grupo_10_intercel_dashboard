@@ -82,8 +82,7 @@ function ContentRowTop (props) {
 					<div className="row">
 						
 						{productsDB ? 
-							<> <i onClick={refresh} className="fas fa-sync-alt" style={{marginLeft:'15px', cursor:'pointer'}}></i>
-							<LastProductInDB data={productsDB}/></>:''}
+							<LastProductInDB data={productsDB}/>:''}
 
 						<CategoriesInDB data={allBrandsModels} />	
 						
