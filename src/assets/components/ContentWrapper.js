@@ -1,8 +1,7 @@
-import { useEffect, useState,  } from 'react'
+import { useState, useEffect } from 'react'
 import TopBar from './TopBar'
 import ContentRowTop from './ContentRowTop'
 import ProductList from './ProductList'
-import LastProductInDB from './LastProductInDB.js'
 import Footer from './Footer'
 import {Route, Switch} from 'react-router-dom'
 
@@ -10,38 +9,43 @@ import {Route, Switch} from 'react-router-dom'
 function ContentWrapper (props) {
 
     const PRODUCTS_API = 'http://localhost:3001/api/products'
-    
-    const [productsDB, setProductsDB] = useState(null)
+		
+    const [products, setProducts] = useState(null)
 
     const apiCall = async () =>{
         
         const products = await fetch(PRODUCTS_API)
         const productsInfo = await products.json()
-
-        setProductsDB(productsInfo)
+        
+        setProducts(productsInfo)        
     }
 
-    useEffect(()=>{
+    useEffect( ()=>{
         apiCall()
-        setInterval(apiCall, 1000 * 60 * 1)
-        }, [])
+        setInterval(apiCall, 1000 * 60 * 5)
+    }, [])
     
+    const refresh = () => {
+        apiCall()
+        console.log('REFRESH');
+    }
+
         return(
+
             <div className="d-flex flex-column" id="content-wrapper">
 
                 <div id="content">
-                    <TopBar />
+                    <TopBar>
+                    
+                        <i onClick={refresh} className="fas fa-sync-alt" style={{marginLeft:'15px', cursor:'pointer'}}></i>
+                    
+                    </TopBar>
                     
                     <Switch>
-                        <Route path="/" exact >
-                            {productsDB ? <ContentRowTop/> : ''}
+                        <Route path="/" exact component={ContentRowTop}/>
+                        <Route path="/products"> 
+                            {products ? <ProductList data={products}/>:''}
                         </Route>
-                        
-                        <Route path="/lastProduct">
-                            {productsDB ? <LastProductInDB data={productsDB}/>:''}
-                        </Route>
-
-                        <Route path="/products" component={ProductList}/>
 
                     </Switch>                    
                 </div>

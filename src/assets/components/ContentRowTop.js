@@ -3,6 +3,7 @@ import { Component, useState, useEffect } from 'react'
 import ContentRowTotals from './ContentRowTotals.js'
 import LastProductInDB from './LastProductInDB.js'
 import CategoriesInDB from './CategoriesInDB.js'
+import { computeHeadingLevel } from '@testing-library/dom'
 
 
 
@@ -17,7 +18,7 @@ function ContentRowTop (props) {
 		const [modelTotal, setModelTotal] = useState('')
 		const [userTotal, setUserTotal] = useState('')
 		const [allBrandsModels, setAllBrandsModels] = useState([])
-
+	
 		let totals = [
 			{titulo:'Celulares en Stock',colorBorde:'#4e73df',cifra:celTotal,icono:'fa-mobile'},
 			{titulo:'Marcas en Stock',colorBorde:'green',cifra:brandTotal,icono:'fa-copyright'},
@@ -54,10 +55,12 @@ function ContentRowTop (props) {
 		}
 
 		useEffect(()=>{
+
 			settingStates()
-			setInterval(settingStates, 1000 * 60 * 1)
-			}, [])
-	
+			setInterval(settingStates, 1000 * 60 * 5)
+
+		}, [])		
+
 		const refresh = () => {
 			settingStates()
 			console.log('REFRESH');
@@ -78,7 +81,9 @@ function ContentRowTop (props) {
 					{/* <!-- Content Row Last Movie in Data Base --> */}
 					<div className="row">
 						
-						{productsDB ? <LastProductInDB data={productsDB}/>:''}
+						{productsDB ? 
+							<> <i onClick={refresh} className="fas fa-sync-alt" style={{marginLeft:'15px', cursor:'pointer'}}></i>
+							<LastProductInDB data={productsDB}/></>:''}
 
 						<CategoriesInDB data={allBrandsModels} />	
 						
