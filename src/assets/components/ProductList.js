@@ -19,32 +19,39 @@ function ProductList (props){
 
 
     return(
-        <section className="ProductList">
+        <main>
+            <section className="ProductList">
 
-                {listProducts && 
-                    <>
-                    {listProducts.products.map( (cel,i) => {
-                      return(  
-                        <article className="productCard" key={`${cel.id}-${i}`}>
-                            <div>
-                                <p>{cel.brand}</p>
-                                <p>{cel.model}</p>
-                                <p>USD$ {cel.price}</p>
+                    {listProducts && 
+                        <>
+                        {listProducts.products.map( (cel,i) => {
+                        return(  
+                            <article className="productCard" key={`${cel.id}-${i}`}>
+                                <img src={cel.image}/>
+                                <div>
+                                    <p className="model">{cel.model}</p>
+                                    <p className="brand">{cel.brand}</p>
+                                    <p className="price">USD$ {cel.price}</p>
+                                    <p className="offer">{cel.offer ? 'En Oferta' : ''}</p>
+                                </div>                                
+                                <a href={`http://localhost:3001/products/${cel.id}/editProduct`} target="_blank"><button className="editButton">Editar</button></a>
+                            </article>
+                        )
+                        })}
+                        <div className ="previousNextButtons" >
+                            <div className ="pageButtons">
+                                <Link to={listProducts.previous}> <button className="previous">Anterior</button></Link>
                             </div>
-                            <img src={cel.image}/>
-                            <p>{cel.offer ? 'En Oferta' : ''}</p>
-                            <a href={`http://localhost:3001/products/${cel.id}/editProduct`} target="_blank"><button>To Edit</button></a>
-                        </article>
-                      )
-                    })}
-                <Link to={listProducts.previous}>Anterior</Link>
-                <Link to={listProducts.next}>Siguiente</Link>
-                </>
-                }
+                            <div className ="pageButtons">
+                                <Link to={listProducts.next}> <button className="next">Siguiente</button></Link>
+                            </div>
+                        </div>
+                        </>
+                    }
+            </section>
             
-                
-        </section>
-    )
+        </main>
+    ) 
 
 }
 

@@ -2,22 +2,99 @@
     width: 100%;
     display: flex;
     flex-wrap: wrap;
+    justify-content: space-evenly
 
 }
 
 .productCard{
-    flex-basis: 30%;
-    margin: 5px;
-    padding: 5px;
-
-    border: 1px solid grey;
-    border-radius: 8%;
-    background-color: #faf8f8;
-
     display: flex;
+    justify-content: space-evenly;
+    flex-basis: 30%;
+    margin: 10px;
+    padding: 15px 0px;
+    box-shadow: 0px 2px 7px #b6b6b8;
+    border-radius: 16px;
+    margin-bottom: 25px;
+
+    background-color:white;
+
+    
 
 }
 
 .productCard img{
     height: 100px;
+}
+
+.model {
+    font-size: 1.3rem;
+    color: black;
+    font-weight: 600;
+   
+}
+
+.brand {
+    font-size: 1rem;
+    color: black;
+    text-transform: capitalize;
+}
+
+.price {
+    color: #71D894;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.offer {
+    color: #e61313;
+    font-size: 14px;
+    font-weight: 500;
+   
+}
+
+.editButton{
+    width: 65px;
+    height: 28px;
+    background-color: white;
+    border-radius: 5px;
+    margin: 8px;
+    border: solid #40B568 1px;
+    font-size: 14px;
+
+}
+
+.editButton:hover{
+    background-color:#71D894
+}
+
+
+
+.previous {
+    color: black;
+    font-size: 14px;
+    background-color: #71D894;
+    border: 1px solid transparent;
+    border-radius: .35rem;
+    padding: .375rem .75rem;
+    line-height: 1.5;  
+}
+
+.next {
+    color:black;
+    font-size: 14px;
+    background-color: #71D894;
+    border: 1px solid transparent;
+    border-radius: .35rem;
+    padding: .375rem .75rem;
+    line-height: 1.5;  
+}
+
+.previousNextButtons{
+   display:flex;
+   align-self: center;
+   margin: 0 70px
+}
+
+.pageButtons{
+    margin: 0 10px
 }
