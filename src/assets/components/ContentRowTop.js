@@ -36,7 +36,7 @@ function ContentRowTop (props) {
 		} , [products,users])
 		
 		let totals = [
-			{titulo:'Celulares en Stock',colorBorde:'#4e73df',cifra:celTotal,icono:'fa-mobile'},
+			{titulo:'Celulares en Stock',colorBorde:'#4e73df',cifra:celTotal,icono:'fa-mobile-alt'},
 			{titulo:'Marcas en Stock',colorBorde:'green',cifra:brandTotal,icono:'fa-copyright'},
 			{titulo:'Modelos en Stock',colorBorde:'grey',cifra:modelTotal,icono:'fa-snowflake'},
 			{titulo:'Usuarios Registrados',colorBorde:'red',cifra:userTotal,icono:'fa-user-friends'}

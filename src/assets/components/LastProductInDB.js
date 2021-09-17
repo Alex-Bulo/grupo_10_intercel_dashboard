@@ -29,7 +29,7 @@ function LastProductInDB (props) {
                         <img className="img-fluid px-3 px-sm-4 mt-3 mb-4" style={{width: '40rem'}} src={lastCel?`${lastCel.imageOne}`:''} alt=" Star Wars - Mandalorian " />
                     </div>
                     <p>{lastCel?`${lastCel.description}`:''}</p>
-                    <p style={{fontWeight:'bold',textAlign:'right', marginRight:'15px'}}>{lastCel?`$ ${lastCel.price}`:''}</p>
+                    <p style={{fontWeight:'bold',textAlign:'right', marginRight:'15px', color: '#71D894'}}>{lastCel?`$ ${lastCel.price}`:''}</p>
                     <a className="btn btn-danger" target="_blank" href={lastCel?`${lastCel.webLink}`:''}>Ver en página</a>
                 </div>
             </div>

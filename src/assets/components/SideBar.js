@@ -31,7 +31,7 @@ function SideBar (props) {
                 {/* <!-- Nav Item - Charts --> */}
                 <li className="nav-item">
                     <Link className="nav-link text-gray-800" to="/lastProduct">
-                        <i className="fas fa-fw fa-chart-area"></i>
+                        <i className="fas fa-mobile-alt"></i>
                         <span>Último Producto</span></Link>
                 </li>
 
