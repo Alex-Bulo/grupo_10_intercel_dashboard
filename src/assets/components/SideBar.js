@@ -6,7 +6,7 @@ function SideBar (props) {
             <ul className="navbar-nav bg-gradient-secondary sidebar sidebar-dark accordion" id="accordionSidebar">
 
                 {/* <!-- Sidebar - Brand --> */}
-                <Link className="sidebar-brand d-flex align-items-center justify-content-center" to="/">
+                <Link to="/" className="sidebar-brand d-flex align-items-center justify-content-center">
                     <div className="sidebar-brand-icon">
                         <img className="w-100" src={logo} alt="Intercel" />
                     </div>
@@ -17,7 +17,7 @@ function SideBar (props) {
 
                 {/* <!-- Nav Item - Dashboard --> */}
                 <li className="nav-item active">
-                    <Link className="nav-link" to="/">
+                    <Link to="/" className="nav-link">
                         <i className="fas fa-fw fa-tachometer-alt"></i>
                         <span>Dashboard - Intercel</span></Link>
                 </li>

@@ -6,6 +6,7 @@ import Footer from './Footer'
 import {Route, Switch, useLocation} from 'react-router-dom'
 import LastProductInDB from './LastProductInDB'
 import CategoriesInDB from './CategoriesInDB'
+import ProtectedRoute from './ProtectedRoute'
 
 
 function ContentWrapper (props) {
@@ -42,7 +43,8 @@ function ContentWrapper (props) {
         apiCall()
         console.log('Refreshed');
     }
-
+    // localStorage.setItem('isAuth', false)
+// console.log(props.location);
         return(
 
             <div className="d-flex flex-column" id="content-wrapper">
@@ -57,7 +59,7 @@ function ContentWrapper (props) {
                     <Switch>
                         <Route path="/" exact> 
                             {(products&&users) ? <ContentRowTop data={[products,users]}/>:''}
-                        </Route>
+                        </Route>    
                          
                 
                         { products &&
@@ -65,9 +67,20 @@ function ContentWrapper (props) {
                         <Route path="/products/list/:page"> 
                             <ProductList/>
                         </Route>
-                                <Route path="/lastProduct"> 
+                        
+                        <Route path="/lastProduct">
+                            <ProtectedRoute 
+                                component={LastProductInDB}
+                                data={products}
+                            />
+
+                        </Route>
+                         
+                                    
+                                
+                                {/* <Route path="/lastProduct"> 
                                     <LastProductInDB data={products}/>
-                                </Route>
+                                </Route> */}
                                 <Route path="/brands"> 
                                     <CategoriesInDB data={[...products.countByBrand]}/>
                                 </Route>
