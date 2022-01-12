@@ -2,14 +2,14 @@ import { useState, useEffect } from 'react'
 
 
 function TopBar (props) {
-
+	const userID = sessionStorage.getItem('user')
 	const {users} = props.data
 
 	const [user, setUser] = useState('')
 
 	useEffect( async ()=>{
 
-		let userInfo = await fetch(`${users[2].detail}`)
+		let userInfo = await fetch(`http://localhost:3001/api/users/${userID}`)
 		userInfo = await userInfo.json()
 		
 		setUser({...userInfo})

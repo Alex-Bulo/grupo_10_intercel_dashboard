@@ -4,10 +4,11 @@ import { Component } from "react/cjs/react.production.min";
 
 function ProtectedRoute ({component: Component, ...restOfProps}){
     let {pathname} = useLocation()
-    console.log('PROUTE', pathname);
-    const isAuth = localStorage.getItem('isAuth')
+
+    const userID = sessionStorage.getItem('user')
+    console.log(userID?true:false);
     return(
-        isAuth === 'true' ?
+        userID ?
             <Component {...restOfProps}/> :
             <Redirect to={{pathname:'/login', state:{from:pathname}}} />
 
